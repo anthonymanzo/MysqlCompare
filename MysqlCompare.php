@@ -5,7 +5,7 @@
 //  
 //  How?  Install MDB2 & relevant driver (mysql or mysqli) and type at the command line
 //  
-//  DB_Compare.php mysql://root:xxxx@myserv1.whatevs.com/DBNAME mysql://root:xxxx@myserv2.whatevs.com/DBNAME
+//  MysqlCompare.php mysql://root:xxxx@myserv1.whatevs.com/DBNAME mysql://root:xxxx@myserv2.whatevs.com/DBNAME
 //  
 
 require 'MDB2.php';
