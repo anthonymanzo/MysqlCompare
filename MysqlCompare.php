@@ -7,6 +7,9 @@
 //  
 //  MysqlCompare.php mysql://root:xxxx@myserv1.whatevs.com/DBNAME mysql://root:xxxx@myserv2.whatevs.com/DBNAME
 //  
+// Requires Pear, MDB2 and whatever db connectors you use.
+// see here:
+// http://pear.php.net/package/MDB2/download/2.4.1
 
 require 'MDB2.php';
 
@@ -18,9 +21,17 @@ class MysqlCompare
 	public function __construct()
 	{
 		$this->db = array();
-		if($_SERVER['argv'][1] && $_SERVER['argv'][2]){
+		if(isset($_SERVER['argv'][1]) && isset($_SERVER['argv'][2])){
 			$this->dsn1 = $_SERVER['argv'][1];
 			$this->dsn2 = $_SERVER['argv'][2];
+		} else {
+		
+			echo "Missing/Invalid arguments, ex:  MysqlCompare.php mysql://root:xxxx@myserv1.whatevs.com/DBNAME mysql://root:xxxx@myserv2.whatevs.com/DBNAME";
+			
+			echo "\n";
+			
+			die();
+		
 		}
 		$this->db[0]['handle'] = $this->makeHandle($this->dsn1);//$this->makeHandle($_SERVER['argv'][1]);
 
@@ -45,6 +56,9 @@ class MysqlCompare
 		//echo $dsn;
 		$db =& MDB2::connect($dsn);
 //		print_r($db);
+		if (PEAR::isError($db)) {
+    		die($db->getMessage());
+		}
 		$db->loadModule('Extended');
 		if (PEAR::isError($db)) {
     		die($db->getMessage());
