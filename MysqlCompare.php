@@ -33,7 +33,7 @@ class MysqlCompare
 		
 		$this->reportDiffs();
 		
-		if($synch){
+		if(isset($synch)){
 			//Do the synch here if requested.
 			// todo
 		}
